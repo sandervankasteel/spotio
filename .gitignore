@@ -5,3 +5,4 @@ node_modules
 build
 dist/Spotify.app
 dist/Spotify.zip
+patcher/node_modules
