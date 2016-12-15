@@ -2,12 +2,18 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>Spotio patcher</title>
+    <script src="js/spotify.js"></script>
+    <script>
+        
+        var spotify = new Spotify();
+    </script>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chrome <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+    <h1>Spotio</h1>
+    <div>
+        <p>The current version of Spotify is: <script>document.write(spotify.getVersion())</script></p>
+        <p>This version is patched with Spotio : <script>document.write(spotify.isPatched() ? "yes" : "no")</script></p> 
+    </div>
   </body>
 </html>
