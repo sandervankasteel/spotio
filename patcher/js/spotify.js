@@ -1,18 +1,28 @@
 const fs = require('fs');
-const exec = require('child_process').exec;
+const child_process = require('child_process');
 
 var Spotify = function () {
-    this.platform = process.platform;
-    this.version = null;
+    this._platform = process.platform;
+    this._version = null;
     this._installDir = null;
 
     this.getVersion = function() {
-        if(this.platform == 'darwin') {
-            // system
-            return "1.4.1234";
-        }
+        if(this._version != null) {
+            return this._version;
+        } 
 
-        return "1.0.43.125.g376063c5";
+        switch(this._platform) {
+            case 'darwin':
+                // get version of application "Spotify"
+                this._version = child_process.execSync('osascript -e \'get version of application "Spotify"\'').toString().trim();
+                break;
+            case 'linux':
+                this._version = "1.0.43.125.g376063c5"; // This is my current Linux version
+                break;
+            default:
+                this._version = null;  
+        }
+        return this._version;
     }
 
     // Returns if the current version of Spotify is already patched with Spotio ^^
@@ -35,25 +45,19 @@ var Spotify = function () {
             return this._installDir;
         }
 
-        switch (this.platform) {
+        switch (this._platform) {
             case 'linux':
                 this._installDir = '/usr/share/spotify';
+                break;
             case 'darwin':
-                try {
-                    var that = this; // Because dirty fixes :(
-                    exec('osascript -e \'tell application "System Events" to POSIX path of (file of process "Spotify")\'', function(err, stdout, stderr) {
-                        if(err) {
-                            throw Error;
-                        }
-                        that._installDir = stdout;       
-                    });
-                } catch(err) {
-                    this._installDir = null;;
-                }
+                this._installDir = child_process.execSync('osascript -e \'tell application "System Events" to POSIX path of (file of process "Spotify")\'').toString().trim(); // Because OS X is nasty sometimes :(
+                break;
             case 'win32':
                 this._installDir = 'C:\\';
+                break;
             default:
                 this._installDir = null;
+                break;
         }
 
         return this._installDir;
