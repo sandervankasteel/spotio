@@ -1,5 +1,3 @@
-const fs = require('fs');
-
 var Patcher = function (spotify, github) {
 
     this._spotify = spotify;
