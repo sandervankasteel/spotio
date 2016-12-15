@@ -27,7 +27,7 @@ var Spotify = function () {
             case 'linux':
                 return '/usr/share/spotify';
             case 'darwin':
-                return '~/Spotify.app';
+                return '/Applications/Spotify.app/Contents/Resources';
             default:
                 return 'C:\\';
         }
