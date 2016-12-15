@@ -5,15 +5,15 @@
     <title>Spotio patcher</title>
     <script src="js/spotify.js"></script>
     <script>
-        
         var spotify = new Spotify();
     </script>
   </head>
   <body>
     <h1>Spotio</h1>
     <div>
+        <p>The path to your current Spotify is: <script>document.write(spotify._installationDirectory())</script></p>
         <p>The current version of Spotify is: <script>document.write(spotify.getVersion())</script></p>
-        <p>This version is patched with Spotio : <script>document.write(spotify.isPatched() ? "yes" : "no")</script></p> 
+        <p>This version is patched with Spotio : <script>document.write(spotify.isPatched() ? "<b>yes :) </b>" : "<b>no :( </b>")</script></p> 
     </div>
   </body>
 </html>
